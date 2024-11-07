@@ -22,6 +22,10 @@ class Funcionario {
     }
 
     public setSalario(salario: number): void {
+        if (salario <= 0) {
+            console.error("Erro: o salário deve ser maior que zero.");
+            return;
+        }
         this.salario = salario;
     }
 
@@ -30,28 +34,56 @@ class Funcionario {
     }
 
     public setCPF(cpf: string): void {
+        const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+        if (!cpfRegex.test(cpf)) {
+            console.error("Erro: o CPF informado é inválido. O formato deve ser 000.000.000-00.");
+            return;
+        }
         this.cpf = cpf;
     }
 
     public exibirInformacoes(): void {
-        console.log(`Nome: ${this.nome}, Salário: ${this.salario.toFixed(2)}, CPF: ${this.cpf}`);
+        console.log(`
+Informações do Funcionário:
+---------------------------------------
+Nome: ${this.nome}
+Salário: R$ ${this.salario.toFixed(2)}
+CPF: ${this.cpf}
+---------------------------------------
+        `);
     }
 
     public exibirInformacoesAtualizadas(): void {
-        console.log(`INFORMAÇÕES ATUALIZADAS: Nome: ${this.nome}, Salário: ${this.salario.toFixed(2)}, CPF: ${this.cpf}`);
+        console.log(`
+Informações Atualizadas do Funcionário:
+---------------------------------------
+Nome: ${this.nome}
+Salário: R$ ${this.salario.toFixed(2)}
+CPF: ${this.cpf}
+---------------------------------------
+        `);
     }
 
     public aumentarSalario(percentual: number): void {
+        if (percentual <= 0) {
+            console.error("Erro: o  aumento deve ser maior que zero.");
+            return;
+        }
         this.salario += this.salario * (percentual / 100);
-        console.log(`Novo salário após aumento de ${percentual}%: ${this.salario}`); 
+        console.log(`
+Aumento de Salário Concedido:
+---------------------------------------
+Percentual de Aumento: ${percentual}%
+Novo Salário: R$ ${this.salario.toFixed(2)}
+---------------------------------------
+        `);
     }
 }
 
 
-
 const funcionario = new Funcionario("João", 3000, "123.456.789-00");
 
-funcionario.exibirInformacoes(); 
+funcionario.exibirInformacoes();
 
 funcionario.aumentarSalario(10);
 
