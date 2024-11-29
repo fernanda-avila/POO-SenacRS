@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const contaPoupanca_1 = require("./contaPoupanca");
+const contaEspecial_1 = require("./contaEspecial");
+const poupanca = new contaPoupanca_1.ContaPoupanca("João", "1234-5", 1000, 10);
+console.log(`Saldo Poupança Inicial: ${poupanca.getSaldo()}`);
+poupanca.calcularRendimento(0.05);
+console.log(`Saldo Poupança após rendimento: ${poupanca.getSaldo()}`);
+const contaEspecial = new contaEspecial_1.ContaEspecial("Maria", "6789-0", 500, 1000);
+console.log(`Saldo Conta Especial Inicial: ${contaEspecial.getSaldo()}`);
+contaEspecial.sacar(1200);
+console.log(`Saldo Conta Especial após saque: ${contaEspecial.getSaldo()}`);
+contaEspecial.sacar(500);
